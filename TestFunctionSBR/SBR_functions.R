@@ -1,6 +1,22 @@
 #CSR
 
+
+
+
 # CSR de base:
+#' Title
+#'
+#' @param CSR_marche 
+#' @param CSR_concentration 
+#' @param CSR_contrepartie 
+#' @param CSR_souscription_vie 
+#' @param CSR_souscription_nonvie 
+#' @param rho : coefficient de correlation entre les sous-risques
+#'
+#' @return
+#' @export
+#'
+#' @examples
 CSR_base = function(CSR_marche, CSR_concentration, CSR_contrepartie, CSR_souscription_vie, CSR_souscription_nonvie, rho){
  CSR = c(CSR_marche, CSR_concentration, CSR_contrepartie, CSR_souscription_vie, CSR_souscription_nonvie)
  return(sqrt(sum(rho_mat * outer(CSR, CSR)))) 
