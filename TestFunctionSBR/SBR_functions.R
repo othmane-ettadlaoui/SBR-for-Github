@@ -17,8 +17,7 @@ CSR_base = function(CSR_marche, CSR_concentration, CSR_contrepartie, CSR_souscri
     }
   }
   resultat = sqrt(resultat)
-  paste("la valeur de CSR_base :",resultat)
-  print("test valide!!!!!!!!!!!!!!!!!!")
+  print(paste("la valeur de CSR_base est :",resultat))
   return(resultat)
 }
 
