@@ -3,13 +3,13 @@ title: "Rapport SBR V1"
 author: "Ettadlaoui Othmane"
 date: "`r Sys.Date()`"
 output:
-  html_document:
-    df_print: paged
-    number_sections: yes
   word_document: 
     toc: yes
     toc_depth: 6
     number_sections: true
+  html_document:
+    df_print: paged
+    number_sections: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -21,6 +21,69 @@ Pendant longtemps, l'assurance au Maroc n'a pas été toujours une culture de no
 Ainsi que, Le faible pouvoir d'achat de la plupart des couches de la population qui considèrent l'assurance comme un produit de luxe, réservé seulement aux marocains issus de la classe à revenu élevé, constituait en partie un véritable handicap au développement naturel de ce secteur. Pour toutes ces raisons, l'assurance, toutes branches confondues, totalement étrangère à la tradition juridique du pays, n'a pu voir le jour qu'après l'avènement du protectorat.
 
 Au fil du temps, cette pratique a réussi à se tisser une place dans la société marocaine. Les premières compagnies d'assurances étaient des compagnies étrangères travaillant dans le domaine de l'assurance maritime, et ce n'est qu'après, que cette activité a pu se généraliser pour toucher d'autres secteurs avec notamment l’arrivée de nouveaux besoins (santé, automobile, biens divers…)
+
+# La construction de la courbe des taux zéro-coupon :
+Dans cette partie nous nous intéressons à la construction de la courbe des taux zéro-coupon dont nous avons besoin dans le reste de ce travaille afin d’actualiser les flux futurs entrant dans le calcul des différentes BEST ESTIMATE. Les taux Zéro Coupons sont extraite à partir des taux moyens pondérés des transactions des bons de trésor publiées par BANK AL MAGHRIB. Ces taux en fait, sont des taux monétaires pour les maturités inférieures ou égales à un an, alors qu’il représente un taux actuariel pour les maturités supérieures à un an, de plus ils ne sont disponibles que pour certaines maturités (Remarque : Insérant une figure).
+
+Pour cette raison on va suivre les étapes suivantes pour la construction de la courbe des taux zéro-coupon :
+
+- 1ere étape : Transformation des taux monétaires en taux actuariels.
+- 2eme étape :  Interpolation linéaire afin d’obtenir des taux actuariels pour des maturités pleines.
+-	3eme étape : Calcule des taux zéro coupons à partir des taux actuariels des maturités pleines par la Méthode du Bootstrap.
+-	4eme étape : Extrapolation de la courbe des taux zéro-coupon pour des maturités non observées lointaines par la méthode de Smith-Wilson
+
+## Transformation des taux monétaires en taux actuariels :
+Cette étape consiste à transformer les taux monétaires à des taux actuariels en utilisant la relation suivante :
+$$
+T_a=(1+\frac{n}{360}*T_m )^{\frac{365}{n}}-1
+$$
+Avec :
+
+$T_a$ : Le taux actuariel.
+
+$T_m$  : Le taux monétaire.
+
+$n$ :  Le nombre de jours entre la date de valeur et la date d’échéance.
+
+$\frac{365}{n}$  : La maturité
+
+Après l’application de cette formule sur Les données de marché marocain (publie par la BAM), nous avons obtenu les résultats situés dans le tableau suivant : (Remarque insertions des résultats obtenu par l’application)
+
+## Interpolation linéaire de la courbe des taux actuariels :
+En réalité nous disposons que des taux actuariels des maturités ayant des valeurs décimales, le but de cette étape est donc la détermination des taux actuariels avec des maturités pleines en utilisant une interpolation linéaire.
+
+Cette opération consiste à déterminer Le DPL qui correspond au dernier point liquide. Il est déterminé de sorte que le volume cumulé des obligations dont les échéances sont supérieures au DPL est inférieur à 6% du volume total des transactions prises en compte pour la construction de la courbe des taux zéro-coupon. Il correspond aussi à dernière maturité observable.
+
+La formule d’interpolation pour toute maturité j allant de 1, 2, . . ., DPL est la suivante : $$
+t_j=t_i+\frac{t_{i+1 }-t_i}{n_{i+1 }-n_i} *(j-n_i )
+$$
+
+Avec :   
+
+$t_j$ : Taux actuariels de maturité pleine j compris entre les maturités n_i et n_(i+1).
+  
+$t_i$ : Taux actuariels de maturités n_i.
+
+## la méthode de Bootstrap:
+
+Le Bootstrap est une technique de reconstitution de la courbe zéro-coupon pas à pas, en déterminant les taux zéro-coupon à partir des taux actuariels, en faisant l'hypothèse que le prix théorique d'une obligation correspond à la somme de ses flux futures actualisés aux taux zéro-coupon de l'échéance de chaque flux. Ainsi, on suppose que les prix des obligations des Bons du trésor sont au pair, c’est-à-dire que le prix d’émission des obligations des bons du trésor et leur valeur nominale sont égaux.
+
+-	**Pour une maturité inferieure ou égale a un an** :
+
+Le taux zéro-coupon est donc le taux actuariel de même maturité. Car aucun coupon n’est payé avant l’échéance.
+
+-	**Pour une maturité supérieure à un an** :
+
+Le taux zéro-coupon est calculé par la formule suivante : (à écrire sur le rapport) (ajouter le graphique et le tableau après calcule de ZC).
+
+## Extrapolation de la courbe des taux zéro-coupon : méthode de Smith-Wilson
+La méthode Smith-Wilson est une méthode d'extrapolation de la courbe des taux d'intérêt développée par les chercheurs Smith et Wilson en 1995, et est utilisée pour extrapoler les taux à long terme. Son est d'ajuster une courbe mathématique à la courbe des taux observée sur le marché, en utilisant une fonction spécifique appelée "fonction de Smith-Wilson". Cette fonction est une combinaison de deux termes : le premier terme représente une fonction de décroissance exponentielle, qui est utilisée pour modéliser la partie courte de la courbe des taux ; le second terme est une fonction polynomiale qui est utilisée pour modéliser la partie longue de la courbe des taux.  
+
+Une fois que la fonction de Smith-Wilson a été ajustée à la courbe des taux, elle peut être utilisée pour extrapoler les taux pour des maturités plus longues que celles disponibles sur le marché. Cette extrapolation est possible car la fonction de Smith-Wilson est conçue pour s'adapter de manière continue à la fois à la partie courte et à la partie longue de la courbe des taux.
+
+
+
+
 
 
 
