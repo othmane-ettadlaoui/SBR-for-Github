@@ -1,15 +1,15 @@
 ---
 title: "Rapport SBR V1"
-author: "Ettadlaoui Othmane"
+author: "ETTADLAOUI Othmane ; DIAKITE Abdoul Oudouss"
 date: "`r Sys.Date()`"
 output:
-  html_document:
-    df_print: paged
-    number_sections: yes
   word_document: 
     toc: yes
     toc_depth: 6
     number_sections: true
+  html_document:
+    df_print: paged
+    number_sections: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -83,14 +83,76 @@ $$
 (ajouter le graphique et le tableau après calcule de ZC).
 
 ## Extrapolation de la courbe des taux zéro-coupon : méthode de Smith-Wilson
-La méthode Smith-Wilson est une méthode d'extrapolation de la courbe des taux d'intérêt développée par les chercheurs Smith et Wilson en 1995, et est utilisée pour extrapoler les taux à long terme. Son est d'ajuster une courbe mathématique à la courbe des taux observée sur le marché, en utilisant une fonction spécifique appelée "fonction de Smith-Wilson". Cette fonction est une combinaison de deux termes : le premier terme représente une fonction de décroissance exponentielle, qui est utilisée pour modéliser la partie courte de la courbe des taux ; le second terme est une fonction polynomiale qui est utilisée pour modéliser la partie longue de la courbe des taux.  
+La méthode Smith-Wilson est une méthode d'extrapolation de la courbe des taux d'intérêt développée par les chercheurs Smith et Wilson en 1995, et est utilisée pour extrapoler les taux à long terme. Son principe est d'ajuster une courbe mathématique à la courbe des taux observée sur le marché, en utilisant une fonction spécifique appelée "fonction de Smith-Wilson". Cette fonction est une combinaison de deux termes : le premier terme représente une fonction de décroissance exponentielle, qui est utilisée pour modéliser la partie courte de la courbe des taux ; le second terme est une fonction polynomiale qui est utilisée pour modéliser la partie longue de la courbe des taux.  
 
 Une fois que la fonction de Smith-Wilson a été ajustée à la courbe des taux, elle peut être utilisée pour extrapoler les taux pour des maturités plus longues que celles disponibles sur le marché. Cette extrapolation est possible car la fonction de Smith-Wilson est conçue pour s'adapter de manière continue à la fois à la partie courte et à la partie longue de la courbe des taux.
 
-(a compliter)
+dans ce modèle le taux à terme à long terme est un paramètre d’entrée fixe qui ne varie pas dans le temps à mesure qu’évoluent les prix des obligations. Elle permet aux taux à terme à long terme de converger vers le taux « infini »(Ultimate Forward Rate) choisi et elle offre une base solide pour couvrir le risque de taux d’intérêt à long terme.
+
+Les paramètres d’entrée sont les suivants :
+
+- le UFR (Ultimate Forward Rate)
+- $\alpha$ la vitesse de convergence vers le UFR.
+
+En fait, sur le marché on observe les prix zéro-coupons de différentes maturités
+$u_1, u_2, . . . , u_N$ alors Smith-Wilson suppose que le facteur d’actualisation $P(\tau) $ est  déterminé par:
+$$
+P(\tau) = e^{-UFR * \tau} + \sum_{j=1}^N \gamma_j * W(\tau , \mu_j)
+$$
+
+Où: 
+$$
+W(\tau , \mu_j) =  e^{-UFR * (\tau + \mu_j )} * [ \alpha * min(\tau , \mu_j) - 0,5 *e^{-\alpha*max(\tau , \mu_j)}*(e^{\alpha*min(\tau , \mu_j)}- e^{-\alpha*max(\tau , \mu_j)} ) ] 
+$$
+
+Avec : 
+- $W$ représente un ensemble de fonctions à noyau pour chaque prix d’obligation observable d’entrée.
+- $\alpha$ : la vitesse de convergence vers le UFR.
+- $N$: le nombre  d’obligations ZC dont le prix est observésur le marché.
+- $u_j$: la j-ème  maturité disponible. .
+- $\gamma_j$ : les inconnus à ajuster par rapport à la courbe des taux zéro-coupon disponible avant extrapolation.
+
+Pour déterminer ces inconnus, on fixe d’abord $UFR$ et $\alpha$,le vecteur $\gamma$ s’obtient comme solution d’un système d’équations linéaires définies par l’expression du prix de chaque obligation ZC considérée.
+
+Soit :
+$$
+m_j = P(\mu_j) = e^{-UFR * \mu_j} + \sum_{j=1}^N \gamma_j * W(\tau , \mu_j)
+$$
+
+Sous forme matricielle :
+$$
+m = P = µ + γ ∗ W ⇒ γ = W^{−1}(P − µ)
+$$
+
+Avec: 
+
+$m = (m_1, m_2, . . . , m_N)^T$ 
+
+$P = (P(u_1) , P(u_2), . . . , P(u_N))^T$
+
+$µ = (e^{−UFR∗u_1}, e^{−UFR∗u_2}, . . .,e^{-UFR*u_N})^T$
+
+$$
+W = 
+\begin{bmatrix}
+W_{11} \; \; \;. . . &W_{1N} \\
+\; \; \; . . . . . ..... \\
+W_{N1} \; \; \;. . . &W_{NN}
 
 
 
+\end{bmatrix}
+$$
+$$
+W{ij} = W (u_i, u_j) : i = 1 . . . N \;et \;j = 1 . . . N
+$$
+
+Apres la détermination des inconnus, on passe au calcul des prix zéro-coupon correspondants aux maturités pleines, et finalemet deduire les taux zéro-coupon correspondants à ces maturités par la relation suivante :
+$$
+R(t) = (\frac{1}{P(t)})^{\frac{1}{t}} - 1
+$$ 
+
+(**Remarque** : ajouter un grapge si possible )
 
 
 # Capital de Solvabilité Requis :
