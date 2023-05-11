@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Ettadlaoui Othmane" />
+<meta name="author" content="ETTADLAOUI Othmane ; DIAKITE Abdoul Oudouss" />
 
 <meta name="date" content="2023-05-11" />
 
@@ -1622,7 +1622,7 @@ display: none;
 
 
 <h1 class="title toc-ignore">Rapport SBR V1</h1>
-<h4 class="author">Ettadlaoui Othmane</h4>
+<h4 class="author">ETTADLAOUI Othmane ; DIAKITE Abdoul Oudouss</h4>
 <h4 class="date">2023-05-11</h4>
 
 </div>
@@ -1747,21 +1747,85 @@ R_n =  ^{n}\sqrt{\frac{1+t_n}{1-t_n + \sum_{i=1}^{n}
 courbe des taux zéro-coupon : méthode de Smith-Wilson</h2>
 <p>La méthode Smith-Wilson est une méthode d’extrapolation de la courbe
 des taux d’intérêt développée par les chercheurs Smith et Wilson en
-1995, et est utilisée pour extrapoler les taux à long terme. Son est
-d’ajuster une courbe mathématique à la courbe des taux observée sur le
-marché, en utilisant une fonction spécifique appelée “fonction de
-Smith-Wilson”. Cette fonction est une combinaison de deux termes : le
-premier terme représente une fonction de décroissance exponentielle, qui
-est utilisée pour modéliser la partie courte de la courbe des taux ; le
-second terme est une fonction polynomiale qui est utilisée pour
-modéliser la partie longue de la courbe des taux.</p>
+1995, et est utilisée pour extrapoler les taux à long terme. Son
+principe est d’ajuster une courbe mathématique à la courbe des taux
+observée sur le marché, en utilisant une fonction spécifique appelée
+“fonction de Smith-Wilson”. Cette fonction est une combinaison de deux
+termes : le premier terme représente une fonction de décroissance
+exponentielle, qui est utilisée pour modéliser la partie courte de la
+courbe des taux ; le second terme est une fonction polynomiale qui est
+utilisée pour modéliser la partie longue de la courbe des taux.</p>
 <p>Une fois que la fonction de Smith-Wilson a été ajustée à la courbe
 des taux, elle peut être utilisée pour extrapoler les taux pour des
 maturités plus longues que celles disponibles sur le marché. Cette
 extrapolation est possible car la fonction de Smith-Wilson est conçue
 pour s’adapter de manière continue à la fois à la partie courte et à la
 partie longue de la courbe des taux.</p>
-<p>(a cpmpliter)</p>
+<p>dans ce modèle le taux à terme à long terme est un paramètre d’entrée
+fixe qui ne varie pas dans le temps à mesure qu’évoluent les p ix des
+obligations. Elle permet aux taux à terme à long terme de converger vers
+le taux « infini »(UFR) choisi et elle offre une base solide pour
+couvrir le risque de taux d’intérêt à long terme.</p>
+<p>Les paramètres d’entrée sont les suivants :</p>
+<ul>
+<li>le UFR (Ultimate Forward Rate)</li>
+<li><span class="math inline">\(\alpha\)</span> la vitesse de
+convergence vers le UFR.</li>
+</ul>
+<p>En fait, sur le marché on observe les prix zéro-coupons de
+différentes maturités <span class="math inline">\(u_1, u_2, . . . ,
+u_N\)</span> alors Smith-Wilson suppose que le facteur d’actualisation
+$P() $ est déterminé par: <span class="math display">\[
+P(\tau) = e^{-UFR * \tau} + \sum_{j=1}^N \gamma_j * W(\tau , \mu_j)
+\]</span></p>
+<p>Où: <span class="math display">\[
+W(\tau , \mu_j) =  e^{-UFR * (\tau + \mu_j )} * [ \alpha * min(\tau ,
+\mu_j) - 0,5 *e^{-\alpha*max(\tau , \mu_j)}*(e^{\alpha*min(\tau ,
+\mu_j)}- e^{-\alpha*max(\tau , \mu_j)} ) ]
+\]</span></p>
+<p>Avec : - <span class="math inline">\(W\)</span> représente un
+ensemble de fonctions à noyau pour chaque prix d’obligation observable
+d’entrée. - <span class="math inline">\(\alpha\)</span> : la vitesse de
+convergence vers le UFR. - <span class="math inline">\(N\)</span>: le
+nombre d’obligations ZC dont le prix est observésur le marché. - <span class="math inline">\(u_j\)</span>: la j-ème maturité disponible. . -
+<span class="math inline">\(\gamma_j\)</span> : les inconnus à ajuster
+par rapport à la courbe des taux zéro-coupon disponible avant
+extrapolation.</p>
+<p>Pour déterminer ces inconnus, on fixe d’abord <span class="math inline">\(UFR\)</span> et <span class="math inline">\(\alpha\)</span>,le vecteur <span class="math inline">\(\gamma\)</span> s’obtient comme solution d’un
+système d’équations linéaires définies par l’expression du prix de
+chaque obligation ZC considérée.</p>
+<p>Soit : <span class="math display">\[
+m_j = P(\mu_j) = e^{-UFR * \mu_j} + \sum_{j=1}^N \gamma_j * W(\tau ,
+\mu_j)
+\]</span></p>
+<p>Sous forme matricielle : <span class="math display">\[
+m = P = µ + γ ∗ W ⇒ γ = W^{−1}(P − µ)
+\]</span></p>
+<p>Avec:</p>
+<p><span class="math inline">\(m = (m_1, m_2, . . . ,
+m_N)^T\)</span></p>
+<p><span class="math inline">\(P = (P(u_1) , P(u_2), . . . ,
+P(u_N))^T\)</span></p>
+<p><span class="math inline">\(µ = (e^{−UFR∗u_1}, e^{−UFR∗u_2}, . .
+.,e^{-UFR*u_N})^T\)</span></p>
+$$ W =
+<span class="math display">\[\begin{bmatrix}
+W_{11} \; \; \;. . . &amp;W_{1N} \\
+\; \; \; . . . . . ..... \\
+W_{N1} \; \; \;. . . &amp;W_{NN}
+
+
+
+\end{bmatrix}\]</span>
+<p><span class="math display">\[
+\]</span> W{ij} = W (u_i, u_j) : i = 1 . . . N ;et ;j = 1 . . . N $$</p>
+<p>Apres la détermination des inconnus, on passe au calcul des prix
+zéro-coupon correspondants aux maturités pleines, et finalemet deduire
+les taux zéro-coupon correspondants à ces maturités par la relation
+suivante : <span class="math display">\[
+R(t) = (\frac{1}{P(t)})^{\frac{1}{t}} - 1
+\]</span></p>
+<p>(<strong>Remarque</strong> : ajouter un grapge si possible )</p>
 </div>
 </div>
 <div id="capital-de-solvabilité-requis" class="section level1" number="3">
