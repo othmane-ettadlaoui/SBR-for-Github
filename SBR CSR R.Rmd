@@ -3,13 +3,13 @@ title: "Rapport SBR V1"
 author: "Ettadlaoui Othmane"
 date: "`r Sys.Date()`"
 output:
+  html_document:
+    df_print: paged
+    number_sections: yes
   word_document: 
     toc: yes
     toc_depth: 6
     number_sections: true
-  html_document:
-    df_print: paged
-    number_sections: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -74,14 +74,20 @@ Le taux zéro-coupon est donc le taux actuariel de même maturité. Car aucun co
 
 -	**Pour une maturité supérieure à un an** :
 
-Le taux zéro-coupon est calculé par la formule suivante : (à écrire sur le rapport) (ajouter le graphique et le tableau après calcule de ZC).
+Le taux zéro-coupon est calculé par la formule suivante : 
+$$
+R_n =  ^{n}\sqrt{\frac{1+t_n}{1-t_n + \sum_{i=1}^{n} \frac{1}{(1+R_i)^{i}}}} - 1
+$$
+
+
+(ajouter le graphique et le tableau après calcule de ZC).
 
 ## Extrapolation de la courbe des taux zéro-coupon : méthode de Smith-Wilson
 La méthode Smith-Wilson est une méthode d'extrapolation de la courbe des taux d'intérêt développée par les chercheurs Smith et Wilson en 1995, et est utilisée pour extrapoler les taux à long terme. Son est d'ajuster une courbe mathématique à la courbe des taux observée sur le marché, en utilisant une fonction spécifique appelée "fonction de Smith-Wilson". Cette fonction est une combinaison de deux termes : le premier terme représente une fonction de décroissance exponentielle, qui est utilisée pour modéliser la partie courte de la courbe des taux ; le second terme est une fonction polynomiale qui est utilisée pour modéliser la partie longue de la courbe des taux.  
 
 Une fois que la fonction de Smith-Wilson a été ajustée à la courbe des taux, elle peut être utilisée pour extrapoler les taux pour des maturités plus longues que celles disponibles sur le marché. Cette extrapolation est possible car la fonction de Smith-Wilson est conçue pour s'adapter de manière continue à la fois à la partie courte et à la partie longue de la courbe des taux.
 
-
+(a compliter)
 
 
 
