@@ -3,13 +3,13 @@ title: "Rapport SBR V1"
 author: "ETTADLAOUI Othmane ; DIAKITE Abdoul Oudouss"
 date: "`r Sys.Date()`"
 output:
+  html_document:
+    df_print: paged
+    number_sections: yes
   word_document: 
     toc: yes
     toc_depth: 6
     number_sections: true
-  html_document:
-    df_print: paged
-    number_sections: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -147,12 +147,112 @@ $$
 W{ij} = W (u_i, u_j) : i = 1 . . . N \;et \;j = 1 . . . N
 $$
 
-Apres la détermination des inconnus, on passe au calcul des prix zéro-coupon correspondants aux maturités pleines, et finalemet deduire les taux zéro-coupon correspondants à ces maturités par la relation suivante :
+Aprés la détermination des inconnus, on passe au calcul des prix zéro-coupon correspondants aux maturités pleines, et finalemet deduire les taux zéro-coupon correspondants à ces maturités par la relation suivante :
 $$
 R(t) = (\frac{1}{P(t)})^{\frac{1}{t}} - 1
 $$ 
 
 (**Remarque** : ajouter un grapge si possible )
+
+# VALORISATION DES PROVISIONS TECHNIQUES PRUDENTIELLES:
+Les provisions techniques prudentielles sont valorisées brutes de réassurance en considérant les contrats dont l’engagement de l’entreprise est en cours à la date d’inventaire. Les contrats d’assurance non-vie à tacite reconduction dont la date d’effet intervient postérieurement à la date d’inventaire et dont le préavis de résiliation a expiré à cette date sans qu’il y ait une demande de résiliation sont également pris en considération.
+
+Elles sont évaluées comme suit :
+$$
+PT = BE_{engagement} + BE_{fraisGestion} + MargeRisque
+$$
+
+Avec :
+
+- *$PT$* : la provision technique
+
+- *$BE_{engagement}$* : La meilleure estimation des engagements correspond à la somme probabilisée et actualisée de flux de trésorerie futurs afférents aux engagements de l'entreprise d'assurances et de réassurance au titre des contrats souscrits et déterminée, selon la nature des opérations d'assurance
+
+- *$BE_{fraisGestion}$* : La meilleure estimation des frais de gestion correspond à la somme probabilisée et actualisée des flux de frais de gestion des contrats et déterminée, selon la nature des opérations d'assurance.
+
+- *$MargeRisque$* : La marge de risque correspond au coût d'immobilisation du capital de solvabilité requis afférent aux engagements garantis. Elle est calculée, séparément pour les engagements des opérations d'assurances vie et rentes découlant des opérations non vie ainsi que pour les engagements des opérations non vie.
+
+## Opérations d'assurance vie, décès ou capitalisation:
+### Meilleure estimations des engagements ($BE_{engagement}$):
+Pour les opérations d’assurance vie, décès ou de capitalisation hors unités de compte, la meilleure estimation des engagements comprend la meilleure estimation des garanties probabilisées et les bénéfices discrétionnaires futurs.
+$$
+_{vie}BE^{engagement} = BE_{garantie}^{prob} + BDF
+$$
+
+Avec :
+
+- $BE_{garantie}^{prob}$: la meilleure estimation des garanties probabilisées.
+- $BDF$: les bénéfices discrétionnaires futurs.
+
+#### Meilleure estimation des garanties probabilisées: {#sec-MEGP}
+La meilleure estimation des garanties probabilisées est calculée garantie par garantie et tête par tête, en actualisant les flux de trésorerie futurs probabilisés, afférents aux engagements garantis à la date d'inventaire. Toutefois, l'entreprise d'assurances et de réassurance peut procéder à une agrégation en retenant des critères homogènes, notamment l'âge et ce, après accord de l'Autorité.
+$$
+BE_{garantie}^{prob} = \sum\limits_{t=0}^{t=N}\frac{(CF^{Dec}_{t}-CF^{Enc}_{t})}{(1+r_t)^t}
+$$
+Avec :
+
+- $CF^{Enc}_{t}$: Les encaissements à la date $t$ qui correspondent aux engagements des assurés.
+- $CF^{Déc}_{t}$: Les décaissements à la date $t$. qui correspondent aux règlements de toutes prestations garanties au titre des contrats, y compris les rachats. Ils sont déterminés en tenant compte des engagements contractuels et en utilisant, le cas échéant, les bases techniques suivantes :
+
+- **La table de mortalité**: La table de mortalité TV 88-90 pour les assurances en cas de vie ou la table de mortalité TD 88-90 pour les assurances en cas de décès (prévues à l'annexe), auxquelles l'entreprise d'assurances et de réassurance peut substituer une table de mortalité d'expérience, matérialisant la mortalité propre à la population de ses assurés et ce, après accord de l'Autorité ;
+
+- **La table de rachat en montant**.
+
+- **La table de résiliation**.
+
+- **Un taux de sortie en rente**.
+
+**Remarque:**
+
+Les flux de trésorerie futurs probabilisés précités sont déterminés en considérant un horizon de projection suffisant pour la couverture de l’ensemble de la durée de vie des engagements à la date d’inventaire.
+
+#### Bénéfices discrétionnaires futurs:
+Les bénéfices discrétionnaires futurs sont évalués pour chaque ensemble homogène de contrats.
+
+$$
+BDF = PPB +\bar{r}^{PB}(SoldeT + SoldeF)\times\mathbf{1}_{(SoldeT + SoldeF) > 0}
+$$
+Avec :
+
+- **$PPB$** : Le montant de la provision pour participation aux bénéfices, évaluée à la valeur comptable;
+
+- **$SoldeT$** : Somme des soldes techniques.
+
+- **$SoldeF$** : Somme des soldes Financiers.
+- **$\bar{r}^{PB}$** : Le taux de participation aux bénéfices moyen servi aux assurés.
+
+**Le taux de participation aux bénéfices moyen servi aux assurés** est calculé en considérant le rapport entre la somme des dotations au titre, des trois derniers exercices clos au moins, affectées à la provision pour participation aux bénéfices afférente aux opérations d'assurance vie, décès ou de capitalisation hors unités de compte et la somme des résultats techniques et financiers des dites opérations sur la même période.
+
+En notation mathématique ça donne :
+$$
+\bar{r}^{PB} = \frac{Dot}{SoldeT + SoldeF}
+$$
+
+Avec :
+
+- $Dot$ : somme des dotations au titre, des trois derniers exercices clos au moins.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Capital de Solvabilité Requis :
