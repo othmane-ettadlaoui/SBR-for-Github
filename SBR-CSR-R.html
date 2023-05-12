@@ -11,7 +11,7 @@
 
 <meta name="author" content="ETTADLAOUI Othmane ; DIAKITE Abdoul Oudouss" />
 
-<meta name="date" content="2023-05-11" />
+<meta name="date" content="2023-05-12" />
 
 <title>Rapport SBR V1</title>
 
@@ -1623,7 +1623,7 @@ display: none;
 
 <h1 class="title toc-ignore">Rapport SBR V1</h1>
 <h4 class="author">ETTADLAOUI Othmane ; DIAKITE Abdoul Oudouss</h4>
-<h4 class="date">2023-05-11</h4>
+<h4 class="date">2023-05-12</h4>
 
 </div>
 
@@ -1919,6 +1919,266 @@ la population de ses assurés et ce, après accord de l’Autorité
 en considérant un horizon de projection suffisant pour la couverture de
 l’ensemble de la durée de vie des engagements à la date
 d’inventaire.</p>
+<p><strong>Exemple</strong> :</p>
+<p>Si on prend l’exemple d’un contrat d’assurance-vie mixte<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> de capital
+en cas de vie égale au capital en cas de décès <span class="math inline">\(K\)</span>. Soit <span class="math inline">\(q_{x+t}\)</span> la probabilité qu’un individu
+d’âge <span class="math inline">\(x\)</span> lors de la souscription
+décéde entre <span class="math inline">\(x+t\)</span> et <span class="math inline">\(x+t+1\)</span>. On note <span class="math inline">\(NbPolice_t\)</span> le nombre de police en début
+de période <span class="math inline">\(t\)</span> et <span class="math inline">\(r_s\)</span> le taux ZC. La prestation
+correspondante à ce contrat en date t : <span class="math display">\[
+_{décès}CF^{Déc}_{t} = K  \times  NbPolice_t \times q_{x+t} \times
+(1+r_t)^t
+\]</span></p>
+</div>
+<div id="bénéfices-discrétionnaires-futurs" class="section level4" number="3.1.1.2">
+<h4><span class="header-section-number">3.1.1.2</span> Bénéfices
+discrétionnaires futurs:</h4>
+<p>Les bénéfices discrétionnaires futurs sont évalués pour chaque
+ensemble homogène de contrats.</p>
+<p><span class="math display">\[
+BDF = PPB +\bar{r}^{PB}(SoldeT + SoldeF)\times\mathbf{1}_{(SoldeT +
+SoldeF) &gt; 0}
+\]</span> Avec :</p>
+<ul>
+<li><p><strong><span class="math inline">\(PPB\)</span></strong> : Le
+montant de la provision pour participation aux bénéfices, évaluée à la
+valeur comptable;</p></li>
+<li><p><strong><span class="math inline">\(SoldeT\)</span></strong> :
+Somme des soldes techniques.</p></li>
+<li><p><strong><span class="math inline">\(SoldeF\)</span></strong> :
+Somme des soldes Financiers.</p></li>
+<li><p><strong><span class="math inline">\(\bar{r}^{PB}\)</span></strong> : Le taux de
+participation aux bénéfices moyen servi aux assurés.</p></li>
+</ul>
+<p><strong>Le taux de participation aux bénéfices moyen servi aux
+assurés</strong> est calculé en considérant le rapport entre la somme
+des dotations au titre, des trois derniers exercices clos au moins,
+affectées à la provision pour participation aux bénéfices afférente aux
+opérations d’assurance vie, décès ou de capitalisation hors unités de
+compte et la somme des résultats techniques et financiers des dites
+opérations sur la même période.</p>
+<p>En notation mathématique ça donne : <span class="math display">\[
+\bar{r}^{PB} = \frac{Dot_{\geq \text{3 exes clos} }}{RT + RF}
+\]</span></p>
+<p>Avec :</p>
+<ul>
+<li><span class="math inline">\(Dot_{\geq \text{3 exes clos} }\)</span>
+: somme des dotations au titre, des trois derniers exercices clos au
+moins.</li>
+<li><span class="math inline">\(RT\)</span> :les résultats
+techniques.</li>
+<li><span class="math inline">\(RF\)</span> :les résultats
+financiers.</li>
+</ul>
+</div>
+</div>
+<div id="meilleure-estimation-des-frais-de-gestions-be_fraisgestion" class="section level3" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Meilleure
+estimation des frais de gestions (<span class="math inline">\(BE_{fraisGestion}\)</span>):</h3>
+<p>La meilleure estimation des frais de gestion correspond à la somme
+actualisée des flux de frais de gestion futurs probabilisés. <span class="math display">\[
+BE_{fraisGestion} = \sum\limits_{t = 1}^{N} \frac{FG_t}{(1+r_t)^t}
+\]</span></p>
+<p>Les frais de gestion futurs sont estimés sur la base d’une projection
+effectuée en considérant un horizon de projection suffisant pour la
+couverture de la durée de vie des engagements à la date d’inventaire.
+Ils sont déterminés pour chaque année de projection en multipliant le
+nombre de contrats par le montant de frais de gestion unitaire moyen.
+<span class="math display">\[
+FG_t = NbContrat_t \times \bar{FG}^{unitaire}_{t}
+\]</span></p>
+<p>Avec :</p>
+<ul>
+<li><span class="math inline">\(\bar{FG}^{unitaire}_{t}\)</span> : Le
+montant de frais de gestion unitaire moyen est estimé en considérant la
+moyenne sur les trois derniers exercices clos des montants de frais de
+gestion unitaires.</li>
+<li><span class="math inline">\(NbContrat_t\)</span> : Le nombre de
+contrats précité est estimé par sous-catégories, compte tenu des bases
+techniques suivantes (La table de mortalité, La table de rachat en
+nombre, La table de résiliation)</li>
+<li><span class="math inline">\(FG_t\)</span> : Les frais de
+gestions.</li>
+</ul>
+<p>Le montant de frais de gestion unitaire au titre de chaque exercice
+clos, correspond au rapport entre le montant de frais de gestion
+déterminé par sous-catégories et le nombre de contrats ou d’adhérents
+pour les contrats d’assurance de groupe, à l’ouverture de l’exercice
+clos considéré.</p>
+<p><span class="math display">\[
+\bar{FG}^{unitaire}_{t} =
+\frac{\overbrace{\frac{FG_{t-1}}{NbContrat_{t-1}}}^{\text{Frais de
+gestion unitaire en
+t-1}}+\frac{FG_{t-2}}{NbContrat_{t-2}}+\frac{FG_{t-3}}{NbContrat_{t-3}}}{3}
+\]</span></p>
+</div>
+</div>
+<div id="rentes-découlants-des-opérations-non-vie" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Rentes découlants des
+opérations non-vie:</h2>
+<p>La meilleure estimation des engagements pour les rentes découlant des
+opérations d’assurance non vie correspond à la meilleure estimation des
+garanties probabilisées déterminée avant. <span class="math display">\[
+BE_{rnv} = BE_{garantie}^{prob}
+\]</span></p>
+<p>Avec :</p>
+<ul>
+<li><span class="math inline">\(BE_{rnv}\)</span> : la meilleure
+estimation rentes découlant des opérations d’assurance non vie.</li>
+<li><span class="math inline">\(BE_{garantie}^{prob}\)</span> : la
+meilleure estimation des garanties probabilisées.</li>
+</ul>
+<p>La meilleure estimation des frais de gestion, pour les rentes
+découlant des opérations d’assurance non vie est déterminée de la meme
+façon comme avant.</p>
+</div>
+<div id="opérations-dassurance-non-vie-hors-rentes" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Opérations
+d’assurance non vie hors rentes:</h2>
+<div id="la-meilleure-estimation-des-engagements" class="section level3" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> La meilleure
+estimation des engagements:</h3>
+<p>la meilleure estimation des engagements comprend la meilleure
+estimation des engagements pour sinistres nets de recours et la
+meilleure estimation des engagements pour primes. <span class="math display">\[
+_{nvhr}BE_{engagement}= _{nvhr}BE_{sinistres}^{eng} +
+_{nvhr}BE_{primes}^{eng}
+\]</span></p>
+<div id="la-meilleure-estimation-des-engagements-pour-primes_nvhrbe_primeseng" class="section level4" number="3.3.1.1">
+<h4><span class="header-section-number">3.3.1.1</span> La meilleure
+estimation des engagements pour primes(<span class="math inline">\(_{nvhr}BE_{primes}^{eng}\)</span>):</h4>
+<p>La meilleure estimation des engagements pour primes correspond à la
+différence entre :</p>
+<ul>
+<li>La somme actualisée des flux de règlements futurs probabilisés nets
+de recours relatifs aux <em>sinistres non encore survenus</em> afférents
+aux contrats.</li>
+<li>Le montant des primes futures probabilisé et actualisé à la date
+d’inventaire, net des frais d’acquisition, afférentes aux contrats.</li>
+</ul>
+<p><span class="math display">\[
+_{nvhr}BE_{primes}^{eng} = \sum_{t \geq 1}
+\frac{\overline{FRFP_{t}}}{(1+ r_t)^t}- \frac{PFP_t}{(1+ r_t)^t}
+\]</span></p>
+<p>avec:</p>
+<ul>
+<li><span class="math inline">\(PFP\)</span>: Le montant des primes
+futures probabilisé.</li>
+<li><span class="math inline">\(\overline{FRFP_{t}}\)</span>: La somme
+actualisée des flux de règlements futurs probabilisés nets de recours
+relatifs aux sinistres non encore survenus,telle que pour une année de
+projection donnée:</li>
+</ul>
+<p><span class="math display">\[
+\overline{FRFP_{t}} = Tx_{liquidation} * RS_{moyen} * (PPNA + PFP)
+\]</span></p>
+<p>Où:</p>
+<ul>
+<li><p><span class="math inline">\(Tx_{liquidation}\)</span>: le taux de
+liquidation,il est estimé en fonction de la cadence de liquidation des
+engagements pour sinistres survenus.</p></li>
+<li><p><span class="math inline">\(RS_{moyen}\)</span>: le ratio de
+sinistralité moyen telle que: <span class="math display">\[
+RS_{moyen_t} = \frac{CU_{t} + CU_{t-1} + CU_{t-2}}{PA_{t} + PA_{t-1}+
+PA_{t-2}}
+\]</span></p></li>
+<li><p><span class="math inline">\(CU\)</span>: [La charge ultime visée
+correspond, par exercice de survenance, à la somme des règlements
+cumulés et des règlements futurs au titre de l’année de survenance
+considérée.] représente la charge ultime.</p></li>
+<li><p><span class="math inline">\(PA\)</span> les primes
+acquises.</p></li>
+</ul>
+<p>Tell que :</p>
+<p><span class="math display">\[
+CU_t = RegCumules_t + RegFutures_t
+\]</span></p>
+<ul>
+<li><span class="math inline">\(RegCumules_t\)</span> : les règlements
+cumulés</li>
+<li><span class="math inline">\(RegFutures_t\)</span>: les règlements
+futurs</li>
+<li><span class="math inline">\(PPNA\)</span>: La provision pour primes
+non acquises.</li>
+<li><span class="math inline">\(PFP\)</span>: Le montant des primes
+futures probabilisé.</li>
+</ul>
+</div>
+<div id="la-meilleure-estimation-des-engagements-pour-sinistres-nets-_nvhrbe_sinistreseng" class="section level4" number="3.3.1.2">
+<h4><span class="header-section-number">3.3.1.2</span> La meilleure
+estimation des engagements pour sinistres nets (<span class="math inline">\(_{nvhr}BE_{sinistres}^{eng}\)</span>):</h4>
+<p>La meilleure estimation des engagements pour sinistres nets de
+recours est déterminée en actualisant, les flux de règlements futurs
+probabilisés nets de recours relatifs aux sinistres survenus afférents
+aux contrats. <span class="math display">\[
+_{nvhr}BE_{sinistres}^{eng} = \sum_{t \geq 1} \frac{FRFP_{t}}{(1+
+r_t)^t}
+\]</span> avec:</p>
+<ul>
+<li><span class="math inline">\(FRFP_{t}\)</span> : les flux de
+règlements futurs probabilisés nets de recours relatifs aux
+<em>sinistres survenus</em>, sont estimés sur la base d’un triangle de
+règlements par année de survenance net de recours conformément à la
+méthode l’annexe N°5.</li>
+</ul>
+</div>
+</div>
+<div id="la-meilleure-estimation-des-frais-de-gestion" class="section level3" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> La meilleure
+estimation des frais de gestion:</h3>
+<p>la meilleure estimation des frais de gestion correspond à la somme
+actualisée des flux de frais de gestion futurs liés aux contrats. <span class="math display">\[
+_{nvhr}BE_{fraisGestion}= \sum_{t \geq 1} \frac{FFGF_t}{(1+r_t)^t}
+\]</span></p>
+<p>avec:</p>
+<ul>
+<li><span class="math inline">\(FFGF\)</span>: les flux de frais de
+gestion futurs. telle que: <span class="math display">\[
+FFGF = Tx_{fraisGestion_{moy}} * (_{nvhr}BE_{sinistres}^{eng} +
+_{nvhr}BE_{primes}^{eng})
+\]</span></li>
+</ul>
+<p>et:</p>
+<ul>
+<li><span class="math inline">\(Tx_{frais gestion_{moy}}\)</span> : Le
+taux de frais de gestion moyen,il est estimé, par sous-catégories
+d’opérations d’assurance, en considérant la moyenne sur les trois
+derniers exercices clos des taux de frais de gestion.</li>
+</ul>
+<p>Donc:</p>
+<p><span class="math display">\[
+_{t}Tx_{fraisGestion_{moy}}= \frac{Tx_{fraisGestion_{t}} +
+Tx_{fraisGestion_{t-1}} + Tx_{fraisGestion_{t-2}}}{3}
+\]</span></p>
+<p>ainsi que :</p>
+<p><span class="math display">\[
+Tx_{frais gestion_{t}} = \frac{FG}{_{nvhr}BE_{sinistres}^{eng}+
+Reglements_{Clos}}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(FG\)</span>: le montant frais de
+gestion.</li>
+<li><span class="math inline">\(Reglements_{Clos}\)</span> : les
+règlements au titre de l’exercice clos.</li>
+</ul>
+</div>
+</div>
+<div id="part-des-cessionnaires-dans-les-provisions-techniques-prudentielles" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Part des
+cessionnaires dans les provisions techniques prudentielles:</h2>
+<p>La part des cessionnaires dans les provisions techniques
+prudentielles est évaluée en considérant la différence entre d’une part,
+la meilleure estimation des engagements cédés et d’autre part,
+l’ajustement pour défaut de contrepartie.</p>
+<p><span class="math display">\[
+Part_{cess} = BE_{cedes}^{eng} - Ajust_{DC}
+\]</span></p>
+<div id="la-meilleure-estimation-des-engagements-cédés-be_cedeseng" class="section level3" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> La meilleure
+estimation des engagements cédés (<span class="math inline">\(BE_{cedes}^{eng}\)</span>):</h3>
+<div id="les-opérations-dassurance-vie-décès-ou-de-capitalisation" class="section level4 unnumbered">
+<h4 class="unnumbered">Les opérations d’assurance vie, décès ou de
+capitalisation</h4>
 </div>
 </div>
 </div>
@@ -2522,6 +2782,19 @@ différés-actif est négatif, l’ajustement précité est nul.</p>
 </div>
 </div>
 </div>
+</div>
+<div class="footnotes footnotes-end-of-document">
+<hr />
+<ol>
+<li id="fn1"><p>Un contrat d’assurance mixte à prime unique sur <span class="math inline">\(N\)</span> années est un type de contrat
+d’assurance-vie qui permet de financer l’assurance-vie en une seule
+fois. Cela signifie que vous payez une prime unique pour couvrir toute
+la durée du contrat. Ce type de contrat est destiné aux personnes qui
+disposent d’un capital et souhaitent diversifier leurs placements tout
+en protégeant leurs proches. Dans sa variante « mixte », elle permet de
+réaliser un placement rémunérateur tout en assurant une couverture
+financière à ses proches.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
 
 

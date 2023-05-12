@@ -206,6 +206,15 @@ Avec :
 
 Les flux de trésorerie futurs probabilisés précités sont déterminés en considérant un horizon de projection suffisant pour la couverture de l’ensemble de la durée de vie des engagements à la date d’inventaire.
 
+**Exemple** :
+
+Si on prend l'exemple d'un contrat d'assurance-vie mixte^[Un contrat d'assurance mixte à prime unique sur $N$ années est un type de contrat d'assurance-vie qui permet de financer l'assurance-vie en une seule fois. Cela signifie que vous payez une prime unique pour couvrir toute la durée du contrat. Ce type de contrat est destiné aux personnes qui disposent d'un capital et souhaitent diversifier leurs placements tout en protégeant leurs proches. Dans sa variante « mixte », elle permet de réaliser un placement rémunérateur tout en assurant une couverture financière à ses proches.] de capital en cas de vie égale au capital en cas de décès $K$.
+Soit $q_{x+t}$ la probabilité qu'un individu d'âge $x$ lors de la souscription décéde entre $x+t$ et $x+t+1$. On note $NbPolice_t$ le nombre de police en début de période $t$ et $r_s$ le taux ZC.
+La prestation correspondante à ce contrat en date t :
+$$
+_{décès}CF^{Déc}_{t} = K  \times  NbPolice_t \times q_{x+t} \times (1+r_t)^t
+$$
+
 #### Bénéfices discrétionnaires futurs:
 Les bénéfices discrétionnaires futurs sont évalués pour chaque ensemble homogène de contrats.
 
@@ -225,35 +234,185 @@ Avec :
 
 En notation mathématique ça donne :
 $$
-\bar{r}^{PB} = \frac{Dot}{SoldeT + SoldeF}
+\bar{r}^{PB} = \frac{Dot_{\geq \text{3 exes clos} }}{RT + RF}
 $$
 
 Avec :
 
-- $Dot$ : somme des dotations au titre, des trois derniers exercices clos au moins.
+- $Dot_{\geq \text{3 exes clos} }$ : somme des dotations au titre, des trois derniers exercices clos au moins.
+- $RT$ :les résultats techniques.
+- $RF$ :les résultats financiers.
+
+### Meilleure estimation des frais de gestions ($BE_{fraisGestion}$):
+La meilleure estimation des frais de gestion correspond à la somme actualisée des flux de frais de gestion futurs probabilisés.
+$$
+BE_{fraisGestion} = \sum\limits_{t = 1}^{N} \frac{FG_t}{(1+r_t)^t}
+$$
+
+Les frais de gestion futurs sont estimés sur la base d’une projection effectuée en considérant un
+horizon de projection suffisant pour la couverture de la durée de vie des engagements à la date
+d’inventaire. Ils sont déterminés pour chaque année de projection en multipliant le nombre de
+contrats par le montant de frais de gestion unitaire moyen.
+$$
+FG_t = NbContrat_t \times \bar{FG}^{unitaire}_{t}
+$$
+
+Avec :
+
+- $\bar{FG}^{unitaire}_{t}$ : Le montant de frais de gestion unitaire moyen est estimé en considérant la moyenne sur les trois derniers exercices clos des montants de frais de gestion unitaires.
+- $NbContrat_t$ : Le nombre de contrats précité est estimé par sous-catégories, compte tenu des bases techniques suivantes (La table de mortalité, La table de rachat en nombre, La table de résiliation)
+- $FG_t$ : Les frais de gestions.
 
 
+Le montant de frais de gestion unitaire au titre de chaque exercice clos, correspond au rapport entre le montant de frais de gestion déterminé par sous-catégories et le nombre de contrats ou d'adhérents pour les contrats d'assurance de groupe, à l'ouverture de l'exercice clos considéré.
+
+$$
+\bar{FG}^{unitaire}_{t} = \frac{\overbrace{\frac{FG_{t-1}}{NbContrat_{t-1}}}^{\text{Frais de gestion unitaire en t-1}}+\frac{FG_{t-2}}{NbContrat_{t-2}}+\frac{FG_{t-3}}{NbContrat_{t-3}}}{3}
+$$
 
 
+## Rentes découlants des opérations non-vie:
+La meilleure estimation des engagements pour les rentes découlant des opérations d’assurance non vie correspond à la meilleure estimation des garanties probabilisées déterminée avant.
+$$
+BE_{rnv} = BE_{garantie}^{prob}
+$$
+
+Avec :
+
+- $BE_{rnv}$ : la meilleure estimation rentes découlant des opérations d'assurance non vie.
+- $BE_{garantie}^{prob}$ : la meilleure estimation des garanties probabilisées.
+
+La meilleure estimation des frais de gestion, pour les rentes découlant des opérations d’assurance non vie est déterminée de la meme façon comme avant.
+
+## Opérations d'assurance non vie hors rentes:
+### La meilleure estimation des engagements:
+la meilleure estimation des engagements comprend la meilleure estimation des engagements pour sinistres nets de recours et la meilleure estimation des engagements pour primes.
+$$
+_{nvhr}BE_{engagement}= _{nvhr}BE_{sinistres}^{eng} + _{nvhr}BE_{primes}^{eng} 
+$$
+
+#### La meilleure estimation des engagements pour primes($_{nvhr}BE_{primes}^{eng}$):
+La meilleure estimation des engagements pour primes correspond à la différence entre :
+
+- La somme actualisée des flux de règlements futurs probabilisés nets de recours relatifs aux *sinistres non encore survenus* afférents aux contrats.
+- Le montant des primes futures probabilisé et actualisé à la date d'inventaire, net des frais d'acquisition, afférentes aux contrats.
+
+$$
+_{nvhr}BE_{primes}^{eng} = \sum_{t \geq 1} \frac{\overline{FRFP_{t}}}{(1+ r_t)^t}- \frac{PFP_t}{(1+ r_t)^t}
+$$
+
+avec:
+
+- $PFP$: Le montant des primes futures probabilisé.
+- $\overline{FRFP_{t}}$: La somme actualisée des flux de règlements futurs probabilisés nets de recours relatifs aux sinistres non encore survenus,telle que pour une année de projection donnée:
+
+$$
+\overline{FRFP_{t}} = Tx_{liquidation} * RS_{moyen} * (PPNA + PFP)
+$$
+
+Où:
+
+- $Tx_{liquidation}$: le taux de liquidation,il est estimé en fonction de la cadence de liquidation des engagements pour sinistres survenus.
+- $RS_{moyen}$: le ratio de sinistralité moyen telle que: 
+$$ 
+RS_{moyen_t} = \frac{CU_{t} + CU_{t-1} + CU_{t-2}}{PA_{t} + PA_{t-1}+ PA_{t-2}}
+$$
+
+- $CU$: [La charge ultime visée correspond, par exercice de survenance, à la somme des règlements cumulés et des règlements futurs au titre de l'année de survenance considérée.] représente la charge ultime.
+- $PA$ les primes acquises.
+
+Tell que :
+
+$$
+CU_t = RegCumules_t + RegFutures_t
+$$
+
+- $RegCumules_t$ : les règlements cumulés 
+- $RegFutures_t$: les règlements futurs
+- $PPNA$: La provision pour primes non acquises.
+- $PFP$: Le montant des primes futures probabilisé.
+
+#### La meilleure estimation des engagements pour sinistres nets ($_{nvhr}BE_{sinistres}^{eng}$):
+La meilleure estimation des engagements pour sinistres nets de recours est déterminée en actualisant, les flux de règlements futurs probabilisés nets de recours relatifs aux sinistres survenus afférents aux contrats.
+$$ 
+_{nvhr}BE_{sinistres}^{eng} = \sum_{t \geq 1} \frac{FRFP_{t}}{(1+ r_t)^t} 
+$$
+avec:
+
+- $FRFP_{t}$ : les flux de règlements futurs probabilisés nets de recours relatifs aux *sinistres survenus*, sont estimés sur la base d'un triangle de règlements par année de survenance net de recours conformément à la méthode  l'annexe N°5.
+
+### La meilleure estimation des frais de gestion:
+la meilleure estimation des frais de gestion correspond à la somme actualisée des flux de frais de gestion futurs liés aux contrats.
+$$
+_{nvhr}BE_{fraisGestion}= \sum_{t \geq 1} \frac{FFGF_t}{(1+r_t)^t}
+$$
+
+avec: 
+
+- $FFGF$: les flux de frais de gestion futurs. telle que:
+$$
+FFGF = Tx_{fraisGestion_{moy}} * (_{nvhr}BE_{sinistres}^{eng} + _{nvhr}BE_{primes}^{eng})
+$$
+
+et:
+
+- $Tx_{frais gestion_{moy}}$ : Le taux de frais de gestion moyen,il est estimé, par sous-catégories d’opérations d’assurance, en considérant la moyenne sur les trois derniers exercices clos des taux de frais de gestion.
+
+Donc:
+
+$$
+_{t}Tx_{fraisGestion_{moy}}= \frac{Tx_{fraisGestion_{t}} + Tx_{fraisGestion_{t-1}} + Tx_{fraisGestion_{t-2}}}{3}
+$$
+
+ainsi que :
+
+$$
+Tx_{frais gestion_{t}} = \frac{FG}{_{nvhr}BE_{sinistres}^{eng}+ Reglements_{Clos}}
+$$
+
+- $FG$: le montant frais de gestion.
+- $Reglements_{Clos}$ : les règlements au titre de l’exercice clos.
 
 
+## Part des cessionnaires dans les provisions techniques prudentielles:
+La part des cessionnaires dans les provisions techniques prudentielles est évaluée en considérant la différence entre d'une part, la meilleure estimation des engagements cédés et d'autre part, l'ajustement pour défaut de contrepartie.
+
+$$
+Part_{cess} = BE_{cedes}^{eng} - Ajust_{DC}
+$$
+
+### La meilleure estimation des engagements cédés ($BE_{cedes}^{eng}$):
+#### Les opérations d'assurance vie, décès ou de capitalisation {-}
+la meilleure estimation des engagements cédés est évaluée en multipliant la meilleure estimation des
+engagements par le rapport entre d’une part, la part des cessionnaires dans les provisions
+mathématiques et dans les provisions pour capitaux, rentes et rachats à payer et d’autre part, la
+somme des provisions mathématiques , des provisions pour capitaux, rentes et rachats à payer bruts
+de réassurance.
+
+$$
+_{vie}BE_{cedes}^{eng} = taux_c \times _{vie}BE^{eng}
+$$
+Avec :
+
+- $taux_c$ (taux de cession): le rapport entre d'une part, la part des cessionnaires dans les provisions mathématiques et dans les provisions pour capitaux, rentes et rachats à payer et d'autre part, la somme des provisions mathématiques, des provisions pour capitaux, rentes et rachats à payer bruts de réassurance.
 
 
+#### Les opérations non vie{-}
+Pour les opérations non vie, la meilleure estimation des engagements cédés correspond à la somme de la meilleure estimation des engagements pour sinistres cédés et de la meilleure estimation des engagements pour primes cédés.
+$$
+_{nvie}BE_{cedes}^{eng} =\; _{sinsitres}BE_{cedes}^{eng} + \; _{primes}BE_{cedes}^{eng}
+$$
+Avec :
 
+> $_{sinsitres}BE_{cedes}^{eng} = taux_s \times BE_{sinsitres}^{eng}$ : La meilleure estimation des engagements pour sinistres cédés visée à la spécification technique 33 ci- dessus est évaluée en multipliant la meilleure estimation des engagements pour sinistres nets de recours visée à par ($taux_s$) le rapport entre la part des cessionnaires dans les provisions pour sinistres à payer et la provision pour sinistres à payer brute de réassurance.
 
+> $_{primes}BE_{cedes}^{eng} = r^{primes}_{cession} \times BE_{primes}^{eng}$ : La meilleure estimation des engagements pour primes cédés visée est évaluée en multipliant la meilleure estimation des engagements pour primes visée par le taux de cession de primes. Le taux de cession ($r^{primes}_{cession}$) de primes précité correspond au rapport entre les primes brutes non vie (cessions) et les primes émises de l'exercice.
 
+### L'ajustement pour défaut de contrepartie:
 
+L'ajustement pour défaut de contrepartie est déterminé en actualisant les flux d'ajustement futurs sur la base de la courbe des taux fixée par l'Autorité.
 
-
-
-
-
-
-
-
-
-
-
+Les flux d'ajustement futurs sont déterminés conformément à la méthode, telle que décrite à **l'annexe N°6** de la circulaire de l'ACAPS.
 
 # Capital de Solvabilité Requis :
 Le Capital de Solvabilité Requis (CSR) est une notion très importante dans les domaines d’assurance et de réassurance, il permet la garantie de tous les risques quantifiables auxquels les entreprises de ces domaines sont exposés.  Le CSR correspond au capital dont a besoin une entreprise d'assurance ou de réassurance pour faire face à tous les risques qui peuvent survenir dans le futur et limiter la probabilité de ruine à 0,5%, c'est-à-dire à une seule occurrence tous les 200 ans.   
