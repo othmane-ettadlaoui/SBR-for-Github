@@ -11,7 +11,7 @@
 
 <meta name="author" content="ETTADLAOUI Othmane ; DIAKITE Abdoul Oudouss" />
 
-<meta name="date" content="2023-05-12" />
+<meta name="date" content="2023-05-16" />
 
 <title>Rapport SBR V1</title>
 
@@ -1623,7 +1623,7 @@ display: none;
 
 <h1 class="title toc-ignore">Rapport SBR V1</h1>
 <h4 class="author">ETTADLAOUI Othmane ; DIAKITE Abdoul Oudouss</h4>
-<h4 class="date">2023-05-12</h4>
+<h4 class="date">2023-05-16</h4>
 
 </div>
 
@@ -1737,7 +1737,34 @@ aucun coupon n’est payé avant l’échéance.</p>
 <li><strong>Pour une maturité supérieure à un an</strong> :</li>
 </ul>
 <p>Le taux zéro-coupon est calculé par la formule suivante : <span class="math display">\[
-R_n =  ^{n}\sqrt{\frac{1+t_n}{1-t_n + \sum_{i=1}^{n}
+R_n =  \sqrt[n]{\frac{1+t_n}{1-t_n * \sum_{i=1}^{n-1}
+\frac{1}{(1+R_i)^{i}}}} - 1
+\]</span></p>
+<p>En effet, on a supposé que le prix théorique d’une obligation
+correspond à la somme de ses flux futures actualisés aux taux
+zéro-coupon de l’échéance de chaque flux: <span class="math display">\[
+P = \frac{t_n * N }{(1+R_1)} + \frac{t_n * N }{(1+R_2)^n}+ \dots +
+\frac{N +t_n * N }{(1+R_n)^n}
+\]</span></p>
+<p>-<span class="math inline">\(P\)</span> : Prix d’émission du bon de
+trésor.</p>
+<p>-<span class="math inline">\(N\)</span> : Valeur Nominale du bon de
+trésor.</p>
+<p>Et puisque on a supposé que les prix des obligations des Bons du
+trésor sont émises au pair, c’est-à-dire que le prix d’émission des
+obligations des bons du trésor et leur valeur nominale sont égaux (P=
+N), on trouve:</p>
+<p><span class="math display">\[
+1 = \frac{t_n  }{(1+R_1)} + \frac{t_n }{(1+R_2)^n}+ \dots + \frac{1+ t_n
+}{(1+R_n)^n}
+\]</span> <span class="math display">\[
+\implies \frac{1+ t_n }{(1+R_n)^n} = 1- t_n * \sum_{i=1}^{n-1}
+\frac{1}{(1+R_i)^i}
+\]</span> <span class="math display">\[
+\implies  (1+R_n)^n = \frac{1+ t_n}{1- t_n * \sum_{i=1}^{n-1}
+\frac{1}{(1+R_i)^i}}
+\]</span> Ce qui preuve que : <span class="math display">\[
+R_n = \sqrt[n]{\frac{1+t_n}{1-t_n * \sum_{i=1}^{n}
 \frac{1}{(1+R_i)^{i}}}} - 1
 \]</span></p>
 <p>(ajouter le graphique et le tableau après calcule de ZC).</p>
@@ -2179,7 +2206,62 @@ estimation des engagements cédés (<span class="math inline">\(BE_{cedes}^{eng}
 <div id="les-opérations-dassurance-vie-décès-ou-de-capitalisation" class="section level4 unnumbered">
 <h4 class="unnumbered">Les opérations d’assurance vie, décès ou de
 capitalisation</h4>
+<p>la meilleure estimation des engagements cédés est évaluée en
+multipliant la meilleure estimation des engagements par le rapport entre
+d’une part, la part des cessionnaires dans les provisions mathématiques
+et dans les provisions pour capitaux, rentes et rachats à payer et
+d’autre part, la somme des provisions mathématiques , des provisions
+pour capitaux, rentes et rachats à payer bruts de réassurance.</p>
+<p><span class="math display">\[
+_{vie}BE_{cedes}^{eng} = taux_c \times _{vie}BE^{eng}
+\]</span> Avec :</p>
+<ul>
+<li><span class="math inline">\(taux_c\)</span> (taux de cession): le
+rapport entre d’une part, la part des cessionnaires dans les provisions
+mathématiques et dans les provisions pour capitaux, rentes et rachats à
+payer et d’autre part, la somme des provisions mathématiques, des
+provisions pour capitaux, rentes et rachats à payer bruts de
+réassurance.</li>
+</ul>
 </div>
+<div id="les-opérations-non-vie" class="section level4 unnumbered">
+<h4 class="unnumbered">Les opérations non vie</h4>
+<p>Pour les opérations non vie, la meilleure estimation des engagements
+cédés correspond à la somme de la meilleure estimation des engagements
+pour sinistres cédés et de la meilleure estimation des engagements pour
+primes cédés. <span class="math display">\[
+_{nvie}BE_{cedes}^{eng} =\; _{sinsitres}BE_{cedes}^{eng} + \;
+_{primes}BE_{cedes}^{eng}
+\]</span> Avec :</p>
+<blockquote>
+<p><span class="math inline">\(_{sinsitres}BE_{cedes}^{eng} = taux_s
+\times BE_{sinsitres}^{eng}\)</span> : La meilleure estimation des
+engagements pour sinistres cédés visée à la spécification technique 33
+ci- dessus est évaluée en multipliant la meilleure estimation des
+engagements pour sinistres nets de recours visée à par (<span class="math inline">\(taux_s\)</span>) le rapport entre la part des
+cessionnaires dans les provisions pour sinistres à payer et la provision
+pour sinistres à payer brute de réassurance.</p>
+</blockquote>
+<blockquote>
+<p><span class="math inline">\(_{primes}BE_{cedes}^{eng} =
+r^{primes}_{cession} \times BE_{primes}^{eng}\)</span> : La meilleure
+estimation des engagements pour primes cédés visée est évaluée en
+multipliant la meilleure estimation des engagements pour primes visée
+par le taux de cession de primes. Le taux de cession (<span class="math inline">\(r^{primes}_{cession}\)</span>) de primes précité
+correspond au rapport entre les primes brutes non vie (cessions) et les
+primes émises de l’exercice.</p>
+</blockquote>
+</div>
+</div>
+<div id="lajustement-pour-défaut-de-contrepartie" class="section level3" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> L’ajustement pour
+défaut de contrepartie:</h3>
+<p>L’ajustement pour défaut de contrepartie est déterminé en actualisant
+les flux d’ajustement futurs sur la base de la courbe des taux fixée par
+l’Autorité.</p>
+<p>Les flux d’ajustement futurs sont déterminés conformément à la
+méthode, telle que décrite à <strong>l’annexe N°6</strong> de la
+circulaire de l’ACAPS.</p>
 </div>
 </div>
 </div>
