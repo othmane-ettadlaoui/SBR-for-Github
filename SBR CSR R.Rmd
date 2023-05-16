@@ -76,8 +76,37 @@ Le taux zéro-coupon est donc le taux actuariel de même maturité. Car aucun co
 
 Le taux zéro-coupon est calculé par la formule suivante : 
 $$
-R_n =  ^{n}\sqrt{\frac{1+t_n}{1-t_n + \sum_{i=1}^{n} \frac{1}{(1+R_i)^{i}}}} - 1
+R_n =  \sqrt[n]{\frac{1+t_n}{1-t_n * \sum_{i=1}^{n-1} \frac{1}{(1+R_i)^{i}}}} - 1
 $$
+
+En effet, on a supposé que le prix théorique d'une obligation correspond à la somme de ses flux futures actualisés aux taux zéro-coupon de l'échéance de chaque flux:
+$$
+P = \frac{t_n * N }{(1+R_1)} + \frac{t_n * N }{(1+R_2)^2}+ \dots + \frac{N +t_n * N }{(1+R_n)^n}
+$$
+
+-$P$ : Prix d'émission  du bon de trésor.
+
+-$N$ : Valeur Nominale  du bon de trésor.
+
+Et puisque on a supposé que les prix des obligations des Bons du trésor sont émises  au pair, c’est-à-dire que le prix d’émission des obligations des bons du trésor et leur valeur nominale sont égaux (P= N), on trouve:
+
+$$
+1 = \frac{t_n  }{(1+R_1)} + \frac{t_n }{(1+R_2)^2}+ \dots + \frac{1+ t_n }{(1+R_n)^n}
+$$
+$$
+\implies \frac{1+ t_n }{(1+R_n)^n} = 1- t_n * \sum_{i=1}^{n-1} \frac{1}{(1+R_i)^i}
+$$
+$$
+\implies  (1+R_n)^n = \frac{1+ t_n}{1- t_n * \sum_{i=1}^{n-1} \frac{1}{(1+R_i)^i}}
+$$
+Ce qui preuve que :
+$$
+R_n = \sqrt[n]{\frac{1+t_n}{1-t_n * \sum_{i=1}^{n} \frac{1}{(1+R_i)^{i}}}} - 1
+$$
+
+
+
+
 
 
 (ajouter le graphique et le tableau après calcule de ZC).
