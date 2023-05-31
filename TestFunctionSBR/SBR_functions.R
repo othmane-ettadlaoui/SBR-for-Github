@@ -1,7 +1,92 @@
-#CSR
+
 library(readxl)
 library(openxlsx)
 
+
+# Valorisation des provisions techniques prudentielles:
+
+PT <- function(BE_eng, BE_fraisGestion, MR){
+   somme = BE_eng + BE_fraisGestion + MR
+   print(paste("Les provisions techniques prudentielles egale :",somme))
+   return(somme)
+}
+
+# Opérations d’assurance vie, décès ou capitalisation:
+# Meilleure estimations des engagements;
+
+BE_eng = function(BE_garanties, BDF){
+  somme = BE_garanties + BDF 
+  print(paste("La Meilleure estimations des engagements :",somme))
+  return(somme)
+}
+
+# Meilleure estimation des garanties probabilisées:
+# BE_garanties: a verifie apres 
+
+#Bénéfices discrétionnaires futurs:
+# BDF :  a faire apres
+
+
+# Meilleure estimation des frais de gestions :
+BE_fraisGestion = function(FG, R){
+  somme = 0
+  for(i in seq_along(FG)){
+    somme = somme + FR[i]/(1+r[i])^i
+  }
+  print(paste("Meilleure estimation des frais de gestions:",somme))
+  return(somme)
+}
+
+# Les frais de gestion futurs:
+# FG : a faire 
+
+# Rentes découlants des opérations non-vie: simple 
+
+# Opérations d’assurance non vie hors rentes:
+## La meilleure estimation des engagements:
+BE_NVHR_Eng = function(BE_eng_sinistre, BE_eng_prime){
+  somme = BE_eng_sinistre + BE_eng_prime
+  return(somme)
+}
+
+### La meilleure estimation des engagements pour primes : a faire
+### La meilleure estimation des engagements pour sinistres nets: 
+BE_eng_sinistre = function(FRFP, R){
+  somme = 0
+  for(i in seq_along(FRFP)){
+    somme = somme + FRFP[i] /(1 + R[i])^i
+  }
+  return(somme)
+}
+
+# La meilleure estimation des frais de gestion:
+
+BE_NVHR_fraisgestion = function(FFGF , R){
+  somme = 0
+  for(i in seq_along(FFGF)){
+    somme = somme + FFGF[i] /(1 + R[i])^i
+  }
+  return(somme)
+  
+}
+
+## Part des cessionnaires dans les provisions techniques prudentielles:
+Part_cess = function(BE_CD_eng, Adj_CD){
+  return(BE_CD_eng - Adj_CD)
+}
+### La meilleure estimation des engagements cédés: 
+
+
+
+
+
+
+
+
+
+
+
+#CSR
 # CSR de base:
 CSR_base = function(CSR_marche, CSR_concentration, CSR_contrepartie, CSR_souscription_vie, CSR_souscription_nonvie, rho_mat){
   
