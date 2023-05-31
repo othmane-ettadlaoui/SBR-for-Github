@@ -10,6 +10,8 @@ library(dplyr)
 library(shiny)
 library(shinydashboard)
 source("SBR_functions.R")
+source("fonctions proba de survie et de deces.R")
+
 # Define UI for application that draws a histogram
 ui <- dashboardPage(
   #Head
@@ -34,7 +36,7 @@ ui <- dashboardPage(
                      menuSubItem(text = "CSR_action",tabName = "CSR_action"),
                      menuSubItem(text = "CSR_taux",tabName = "CSR_taux"),
                      menuSubItem(text = "CSR_immobilier",tabName = "CSR_immobilier"),
-                     menuItem(text = "option 2",tabName = "option2"),
+                     menuItem(text = "Probabilites",tabName = "proba"),
                      menuItem(text = "option 3",tabName = "option3")
                    )
   ),
@@ -47,7 +49,7 @@ ui <- dashboardPage(
                      tabPanel("CSR_Action", h4("Calcule de CSR pour le risque Action"))
                      ),
               fluidRow(
-                       box(status = "danger", solidHeader = T, width = 12, maximizable = T,
+                       box(status = "danger", solidHeader = T, width = 6, maximizable = T,
                            title = "CSR_Action",
                            numericInput("BE_action_Baisse", "BE_action_Baisse", value = 0),
                            numericInput("BE_action", "BE_action", value = 0),
@@ -63,7 +65,7 @@ ui <- dashboardPage(
                      tabPanel("CSR_taux", h4("Calcule de CSR pour le risque Taux")),
               ),
       fluidRow(
-                box(status = "warning", solidHeader = T, width = 12, maximizable = T,
+                box(status = "warning", solidHeader = T, width = 6, maximizable = T,
                     title = "CSR_taux",
                     numericInput("BE_taux_baisse", "BE_taux_baisse", value = 0),
                     numericInput("BE_taux_hausse", "BE_taux_hausse", value = 0),
@@ -78,7 +80,7 @@ ui <- dashboardPage(
                      tabPanel("CSR_immobilier", h4("Calcule de CSR pour le risque Immobilier")),
               ),
               fluidRow(
-                box(status = "warning", solidHeader = T, width = 12, maximizable = T,
+                box(status = "warning", solidHeader = T, width = 6, maximizable = T,
                     title = "CSR_immobilier",
                     numericInput("BE_Baisse", "BE_Baisse", value = 0),
                     numericInput("ME", "BE", value = 0),
@@ -87,7 +89,31 @@ ui <- dashboardPage(
                 )
               )
       ),
-      tabItem(tabName = "option2",
+      tabItem(tabName = "proba",
+              tabBox(id ="tb4",width = 12,
+                     tabPanel("", h4("Calcule des probabilites de survie et de deces")),
+              ),
+              fluidRow(
+                box(status = "success", solidHeader = T, width = 12, maximizable = T,
+                    title = "Proba de survie",
+                    numericInput("Age", "Age", value = 0),
+                    numericInput("Annee", "NOmbre d'annee", value = 0),
+                    actionButton("calculer4", "Calculer"),
+                    verbatimTextOutput("resultat4")      
+                )
+              ),
+             
+             fluidRow(
+                box(status = "danger", solidHeader = T, width = 12, maximizable = T,
+                    title = "Proba de deces",
+                    numericInput("Age2", "Age", value = 0),
+                    numericInput("Annee2", "NOmbre d'annee", value = 0),
+                    actionButton("calculer5", "Calculer"),
+                    verbatimTextOutput("resultat5")      
+                )
+              )
+      ),
+      tabItem(tabName = "option3",
               tabBox(id ="tb4",width = 12,
                      tabPanel("test12", h4("Test valide")),
                     )
@@ -123,6 +149,22 @@ server <- function(input, output) {
   calcule2 = reactive(CSR_immobilier(BE_Baisse1(), BE2())) 
   observeEvent(input$Tester1, {
     output$resultat2 =renderPrint(paste("LE CSR Immobilier EST ",calcule2()))
+  })
+  
+  #Proba de survie:
+  Age1 = reactive({as.numeric(input$Age)}) %>% bindEvent(input$calculer4) 
+  Annee1 = reactive({as.numeric(input$Annee)}) %>% bindEvent(input$calculer4) 
+  proba = reactive(proba_survie(Age1(),Annee1())) 
+  observeEvent(input$calculer4, {
+    output$resultat4 =renderPrint(paste("La proba de survie de cet individu est de :",proba()))
+  })
+  
+  #Proba de deces:
+  Age3 = reactive({as.numeric(input$Age2)}) %>% bindEvent(input$calculer5) 
+  Annee3 = reactive({as.numeric(input$Annee2)}) %>% bindEvent(input$calculer5) 
+  probad = reactive(proba_deces(Age3(),Annee3())) 
+  observeEvent(input$calculer5, {
+    output$resultat5 =renderPrint(paste("La proba de deces de cet individu est de :",probad()))
   })
 }
 

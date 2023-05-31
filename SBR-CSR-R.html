@@ -11,7 +11,7 @@
 
 <meta name="author" content="ETTADLAOUI Othmane ; DIAKITE Abdoul Oudouss" />
 
-<meta name="date" content="2023-05-16" />
+<meta name="date" content="2023-05-19" />
 
 <title>Rapport SBR V1</title>
 
@@ -1623,7 +1623,7 @@ display: none;
 
 <h1 class="title toc-ignore">Rapport SBR V1</h1>
 <h4 class="author">ETTADLAOUI Othmane ; DIAKITE Abdoul Oudouss</h4>
-<h4 class="date">2023-05-16</h4>
+<h4 class="date">2023-05-19</h4>
 
 </div>
 
@@ -1743,7 +1743,7 @@ R_n =  \sqrt[n]{\frac{1+t_n}{1-t_n * \sum_{i=1}^{n-1}
 <p>En effet, on a supposé que le prix théorique d’une obligation
 correspond à la somme de ses flux futures actualisés aux taux
 zéro-coupon de l’échéance de chaque flux: <span class="math display">\[
-P = \frac{t_n * N }{(1+R_1)} + \frac{t_n * N }{(1+R_2)^n}+ \dots +
+P = \frac{t_n * N }{(1+R_1)} + \frac{t_n * N }{(1+R_2)^2}+ \dots +
 \frac{N +t_n * N }{(1+R_n)^n}
 \]</span></p>
 <p>-<span class="math inline">\(P\)</span> : Prix d’émission du bon de
@@ -1755,7 +1755,7 @@ trésor sont émises au pair, c’est-à-dire que le prix d’émission des
 obligations des bons du trésor et leur valeur nominale sont égaux (P=
 N), on trouve:</p>
 <p><span class="math display">\[
-1 = \frac{t_n  }{(1+R_1)} + \frac{t_n }{(1+R_2)^n}+ \dots + \frac{1+ t_n
+1 = \frac{t_n  }{(1+R_1)} + \frac{t_n }{(1+R_2)^2}+ \dots + \frac{1+ t_n
 }{(1+R_n)^n}
 \]</span> <span class="math display">\[
 \implies \frac{1+ t_n }{(1+R_n)^n} = 1- t_n * \sum_{i=1}^{n-1}
@@ -2861,6 +2861,148 @@ Impots_{passif}^{differes} - Impots_{actif}^{differes})
 <p><strong>Remarque</strong></p>
 <p>Dans le cas où l’écart entre les impôts différés-passif et les impôts
 différés-actif est négatif, l’ajustement précité est nul.</p>
+</div>
+</div>
+</div>
+<div id="annexe-n12-correspondance-entre-echelle-de-notation-et-probabilite-de-defaut" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> (ANNEXE N°12)
+CORRESPONDANCE ENTRE ECHELLE DE NOTATION ET PROBABILITE DE DEFAUT:</h2>
+<div id="echelles-de-notation" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Echelles de
+notation:</h3>
+<ul>
+<li>Pour les cessionnaires et les cédantes :</li>
+</ul>
+<p>L’échelle de notation à retenir correspond à la notation financière
+la plus récente délivrée, durant les dix-huit (18) derniers mois, par
+l’une des agences de notation citées ci-dessous et ce, conformément au
+tableau de correspondance suivant :</p>
+<pre class="r"><code>Ligne1 = c(&quot;Echelle de notation&quot;,&quot;S&amp;P&quot;, &quot;FITCH RATING&quot;,&quot;AM BEST&quot;)
+Ligne2 = c(&quot;1&quot;, &quot;Supérieure ou égale à AA&quot;, &quot;Supérieure ou égale à AA&quot;, &quot;Supérieure ou égale à AA&quot;)
+Ligne3 = c(&quot;2&quot;, &quot;Inférieure à AA et supérieure ou égale à A&quot;,&quot;Inférieure à AA et supérieure ou égale à A&quot;,&quot;Inféieure à AA et supérieure ou égale à A&quot;)
+Ligne4 = c(&quot;3&quot;, &quot;Inférieure A et supérieure ou égale à BBB&quot;,&quot;Inférieure A et supérieure ou égale à BBB&quot;,&quot;Inférieure à A et supérieure ou égale à BBB&quot;)
+Ligne5 = c(&quot;4&quot;,&quot;Inférieure à BBB et supérieure ou égale à BB&quot;,&quot;Inférieure à BBB et supérieure ou égale à BB&quot;,&quot;Inférieure à BBB et supérieure ou égale à BB&quot;)
+Ligne6 = c(&quot;5&quot;,&quot; Inférieure à BB&quot;,&quot;Inférieure à BB&quot;, &quot;Inférieure à BB&quot;)
+tableau1 &lt;- matrix(c(Ligne1, Ligne2, Ligne3, Ligne4, Ligne5, Ligne6), nrow = 6, byrow = TRUE)
+tableau1</code></pre>
+<pre><code>##      [,1]                  [,2]                                          
+## [1,] &quot;Echelle de notation&quot; &quot;S&amp;P&quot;                                         
+## [2,] &quot;1&quot;                   &quot;Supérieure ou égale à AA&quot;                    
+## [3,] &quot;2&quot;                   &quot;Inférieure à AA et supérieure ou égale à A&quot;  
+## [4,] &quot;3&quot;                   &quot;Inférieure A et supérieure ou égale à BBB&quot;   
+## [5,] &quot;4&quot;                   &quot;Inférieure à BBB et supérieure ou égale à BB&quot;
+## [6,] &quot;5&quot;                   &quot; Inférieure à BB&quot;                            
+##      [,3]                                          
+## [1,] &quot;FITCH RATING&quot;                                
+## [2,] &quot;Supérieure ou égale à AA&quot;                    
+## [3,] &quot;Inférieure à AA et supérieure ou égale à A&quot;  
+## [4,] &quot;Inférieure A et supérieure ou égale à BBB&quot;   
+## [5,] &quot;Inférieure à BBB et supérieure ou égale à BB&quot;
+## [6,] &quot;Inférieure à BB&quot;                             
+##      [,4]                                          
+## [1,] &quot;AM BEST&quot;                                     
+## [2,] &quot;Supérieure ou égale à AA&quot;                    
+## [3,] &quot;Inféieure à AA et supérieure ou égale à A&quot;   
+## [4,] &quot;Inférieure à A et supérieure ou égale à BBB&quot; 
+## [5,] &quot;Inférieure à BBB et supérieure ou égale à BB&quot;
+## [6,] &quot;Inférieure à BB&quot;</code></pre>
+<p>En l’absence de notation financière délivrée, durant les dix-huit
+(18) derniers mois, par l’une des agences de notation financière
+précitées et en l’absence d’une notation financière équivalente
+justifiée, durant la même période, l’échelle de notation est retenue en
+fonction du ratio de solvabilité du cessionnaire ou de la cédante
+concerné et ce, conformément au tableau de correspondance suivant :</p>
+<pre class="r"><code>Ligne1 = c(&quot;Echelle de notation&quot;,&quot;Ratio de solvabilité&quot;)
+Ligne2 = c(&quot;1&quot;,&quot;Supérieur à 175%&quot;)
+Ligne3 = c(&quot;2&quot;,&quot;]122% ; 175%]&quot;)
+Ligne4 = c(&quot;3&quot;,&quot;]95% ; 122%]&quot;)
+Ligne5 = c(&quot;4&quot;,&quot;]75% ; 95%]&quot;)
+Ligne6 = c(&quot;5&quot;,&quot;Inférieur ou égale à 75%&quot;)
+tableau2 &lt;- matrix(c(Ligne1, Ligne2, Ligne3, Ligne4, Ligne5, Ligne6), nrow = 6, byrow = TRUE)
+tableau2</code></pre>
+<pre><code>##      [,1]                  [,2]                      
+## [1,] &quot;Echelle de notation&quot; &quot;Ratio de solvabilité&quot;    
+## [2,] &quot;1&quot;                   &quot;Supérieur à 175%&quot;        
+## [3,] &quot;2&quot;                   &quot;]122% ; 175%]&quot;           
+## [4,] &quot;3&quot;                   &quot;]95% ; 122%]&quot;            
+## [5,] &quot;4&quot;                   &quot;]75% ; 95%]&quot;             
+## [6,] &quot;5&quot;                   &quot;Inférieur ou égale à 75%&quot;</code></pre>
+<p>Dans les autres cas, l’échelle de notation la plus faible est
+retenue.</p>
+<ul>
+<li>Pour les organismes dépositaires :</li>
+</ul>
+<p>L’échelle de notation à retenir correspond à la notation financière
+la plus récente délivrée, durant les dix-huit (18) derniers mois, par
+l’une des agences de notation citées ci-dessous et ce, conformément au
+tableau de correspondance suivant :</p>
+<pre class="r"><code>Ligne1 = c(&quot;Echelle de notation&quot;,&quot;S&amp;P&quot;, &quot;FITCH RATINGS&quot;,&quot;MOODY’S&quot;)
+Ligne2 = c(&quot;1&quot;,&quot;Supérieure ou égale à AA&quot;,&quot;Supérieure ou égale à AA&quot;,&quot;Supérieure ou égale à Aa&quot;)
+Ligne3 = c(&quot;2&quot;,&quot;Inférieure à AA et supérieure ou égale à A&quot;, &quot;Inférieure à AA et supérieure ou égale à A&quot;, &quot;Inférieure à Aa et supérieure ou égale à A&quot;)
+Ligne4 = c(&quot;3&quot;,&quot;Inférieure A et supérieure ou égale à BBB&quot;, &quot;Inférieure A et supérieure ou égale à BBB&quot;,&quot;Inférieure A et supérieure ou égale à Baa&quot;)
+Ligne5 = c(&quot;4&quot;,&quot;Inférieure à BBB et supérieure ou égale à BB&quot;, &quot;Inférieure à BBB et supérieure ou égale à BB&quot;, &quot;Inférieure à Baa et supérieure ou égale à Ba&quot;)
+Ligne6 = c(&quot;5&quot;,&quot;Inférieure à BB&quot;, &quot;Inférieure à BB&quot;, &quot;Inférieure à Ba&quot;)
+tableau3 &lt;- matrix(c(Ligne1, Ligne2, Ligne3, Ligne4, Ligne5, Ligne6), nrow = 6, byrow = TRUE)
+tableau3</code></pre>
+<pre><code>##      [,1]                  [,2]                                          
+## [1,] &quot;Echelle de notation&quot; &quot;S&amp;P&quot;                                         
+## [2,] &quot;1&quot;                   &quot;Supérieure ou égale à AA&quot;                    
+## [3,] &quot;2&quot;                   &quot;Inférieure à AA et supérieure ou égale à A&quot;  
+## [4,] &quot;3&quot;                   &quot;Inférieure A et supérieure ou égale à BBB&quot;   
+## [5,] &quot;4&quot;                   &quot;Inférieure à BBB et supérieure ou égale à BB&quot;
+## [6,] &quot;5&quot;                   &quot;Inférieure à BB&quot;                             
+##      [,3]                                          
+## [1,] &quot;FITCH RATINGS&quot;                               
+## [2,] &quot;Supérieure ou égale à AA&quot;                    
+## [3,] &quot;Inférieure à AA et supérieure ou égale à A&quot;  
+## [4,] &quot;Inférieure A et supérieure ou égale à BBB&quot;   
+## [5,] &quot;Inférieure à BBB et supérieure ou égale à BB&quot;
+## [6,] &quot;Inférieure à BB&quot;                             
+##      [,4]                                          
+## [1,] &quot;MOODY’S&quot;                                     
+## [2,] &quot;Supérieure ou égale à Aa&quot;                    
+## [3,] &quot;Inférieure à Aa et supérieure ou égale à A&quot;  
+## [4,] &quot;Inférieure A et supérieure ou égale à Baa&quot;   
+## [5,] &quot;Inférieure à Baa et supérieure ou égale à Ba&quot;
+## [6,] &quot;Inférieure à Ba&quot;</code></pre>
+<p>En l’absence de notation financière délivrée, durant les dix-huit
+(18) derniers mois, par l’une des agences de notation financière
+précitées et en l’absence d’une notation financière équivalente
+justifiée, durant la même période, l’échelle de notation est retenue en
+fonction du ratio de solvabilité de l’organisme dépositaire concerné et
+ce, conformément au tableau de correspondance suivant :</p>
+<pre class="r"><code>Ligne1 = c(&quot;Echelle de notation&quot;,&quot;Ratio de solvabilité&quot;)
+Ligne2 = c(&quot;1&quot;,&quot;Supérieur à 21%&quot;)
+Ligne3 = c(&quot;2&quot;,&quot;]14,6% ; 21%]&quot;)
+Ligne4 = c(&quot;3&quot;,&quot;]11,4% ; 14,6%]&quot;)
+Ligne5 = c(&quot;4&quot;,&quot;]9% ; 11,4%]&quot;)
+Ligne6 = c(&quot;5&quot;,&quot;Inférieur ou égale à 9%&quot;)
+tableau4 &lt;- matrix(c(Ligne1, Ligne2, Ligne3, Ligne4, Ligne5, Ligne6), nrow = 6, byrow = TRUE)
+tableau4</code></pre>
+<pre><code>##      [,1]                  [,2]                     
+## [1,] &quot;Echelle de notation&quot; &quot;Ratio de solvabilité&quot;   
+## [2,] &quot;1&quot;                   &quot;Supérieur à 21%&quot;        
+## [3,] &quot;2&quot;                   &quot;]14,6% ; 21%]&quot;          
+## [4,] &quot;3&quot;                   &quot;]11,4% ; 14,6%]&quot;        
+## [5,] &quot;4&quot;                   &quot;]9% ; 11,4%]&quot;           
+## [6,] &quot;5&quot;                   &quot;Inférieur ou égale à 9%&quot;</code></pre>
+<p>Dans les autres cas, l’échelle de notation la plus faible est
+retenue.</p>
+</div>
+<div id="probabilités-de-défaut" class="section level3" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Probabilités de
+défaut</h3>
+<p>La probabilité de défaut annuelle est établie en fonction de
+l’échelle de notation retenue en application des dispositions du 1)
+ci-dessus et ce, conformément au tableau de correspondance ciaprès :</p>
+<pre class="r"><code>Ligne1 = c(&quot;Echelle de notation&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,&quot;5&quot;)
+Ligne2 = c(&quot;Probabilité de défaut annuelle&quot;,&quot;0,010%&quot;,&quot;0,050%&quot;, &quot;0,240%&quot;, &quot;1,200%&quot;, &quot;4,200%&quot;)
+tableau5 &lt;- data.frame(c(Ligne1, Ligne2, Ligne3, Ligne4, Ligne5, Ligne6), nrow = 6, byrow = TRUE)
+tableau5</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["c.Ligne1..Ligne2..Ligne3..Ligne4..Ligne5..Ligne6."],"name":[1],"type":["chr"],"align":["left"]},{"label":["nrow"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["byrow"],"name":[3],"type":["lgl"],"align":["right"]}],"data":[{"1":"Echelle de notation","2":"6","3":"TRUE"},{"1":"1","2":"6","3":"TRUE"},{"1":"2","2":"6","3":"TRUE"},{"1":"3","2":"6","3":"TRUE"},{"1":"4","2":"6","3":"TRUE"},{"1":"5","2":"6","3":"TRUE"},{"1":"Probabilité de défaut annuelle","2":"6","3":"TRUE"},{"1":"0,010%","2":"6","3":"TRUE"},{"1":"0,050%","2":"6","3":"TRUE"},{"1":"0,240%","2":"6","3":"TRUE"},{"1":"1,200%","2":"6","3":"TRUE"},{"1":"4,200%","2":"6","3":"TRUE"},{"1":"2","2":"6","3":"TRUE"},{"1":"]14,6% ; 21%]","2":"6","3":"TRUE"},{"1":"3","2":"6","3":"TRUE"},{"1":"]11,4% ; 14,6%]","2":"6","3":"TRUE"},{"1":"4","2":"6","3":"TRUE"},{"1":"]9% ; 11,4%]","2":"6","3":"TRUE"},{"1":"5","2":"6","3":"TRUE"},{"1":"Inférieur ou égale à 9%","2":"6","3":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
 </div>
 </div>
 </div>
